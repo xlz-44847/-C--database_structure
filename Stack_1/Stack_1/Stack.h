@@ -17,7 +17,7 @@ typedef struct Stack
 void STInit(ST* pst);
 void STDestroy(ST* pst);
 
-void STPush(ST* pst);
+void STPush(ST* pst, STDataType x);
 void STPop(ST* pst);
 
 bool STEmpty(ST* pst);

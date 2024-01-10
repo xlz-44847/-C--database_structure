@@ -1,4 +1,5 @@
 #pragma once
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<stdbool.h>
@@ -16,8 +17,8 @@ typedef struct Heap
 void HeapInit(HP* php);
 void HeapDestroy(HP* php);
 
-void HeapPush(HP* php, HPDataType x, bool cmp(const void*, const void*));
-void HeapPop(HP* php, bool cmp(const void*, const void*));
+void HeapPush(HP* php, HPDataType x);
+void HeapPop(HP* php);
 
 int HeapSize(HP* php);
 bool HeapEmpty(HP* php);

@@ -17,7 +17,7 @@ void STPush(ST* pst,STDataType x)
 	if (pst->top + 1 == pst->capacity)
 	{
 		int newcapacity = pst->capacity == 0 ? 4 : pst->capacity * 2;
-		ST* tmp = realloc(pst->data, newcapacity*sizeof(STDataType));
+		STDataType* tmp = realloc(pst->data, newcapacity*sizeof(STDataType));
 		if (tmp == NULL)
 		{
 			perror("realloc fail");
