@@ -29,23 +29,46 @@ BTNode* BuyNode(BTDataType x)
 }
 
 // 通过前序遍历的数组"ABD##E#H##CF##G##"构建二叉树
-BTNode* BinaryTreeCreate(BTDataType* a, int n, int* pi)
+//BTNode* BinaryTreeCreate(BTDataType* a, int* pi)
+//{
+//	BTNode* tmp = NULL;
+//	if (*(a + *pi) == '#')
+//	{
+//		(*pi)++;
+//		return NULL;
+//	}
+// 	if (*(a + *pi) != '#')
+//	{
+//		tmp = BuyNode(*(a + *pi));
+//		(*pi)++;
+//		tmp->left = BinaryTreeCreate(a, pi);
+//		tmp->right = BinaryTreeCreate(a, pi);
+//	}
+//	return tmp;
+//}
+
+BTNode* BinaryTreeCreate(BTDataType* a, int* pi)
 {
-	BTNode* tmp = NULL;
-	if (*(a + *pi) == '#')
+	if (a[*pi] == '#')
 	{
 		(*pi)++;
 		return NULL;
 	}
- 	if (*(a + *pi) != '#')
+
+	BTNode* root = BuyNode(*(a + *pi));
+	if (root == NULL)
 	{
-		tmp = BuyNode(*(a + *pi));
-		(*pi)++;
-		tmp->left = BinaryTreeCreate(a, n, pi);
-		tmp->right = BinaryTreeCreate(a, n, pi);
+		perror("malloc fail");
+		exit(-1);
 	}
-	return tmp;
+	root->data = a[(*pi)++];
+
+	root->left = BinaryTreeCreate(a, pi);
+	root->right = BinaryTreeCreate(a, pi);
+	return root;
 }
+
+
 // 二叉树销毁
 void BinaryTreeDestory(BTNode** root)
 {
@@ -207,7 +230,7 @@ int main()
 {
 	char arr[18] = "ABD##E#H##CF##G##";
 	int count = 0;
-	BTNode* root = BinaryTreeCreate(arr, 17, &count);
+	BTNode* root = BinaryTreeCreate(arr, &count);
 	
 	printf("PrevOrder: ");
 	BinaryTreePrevOrder(root);
