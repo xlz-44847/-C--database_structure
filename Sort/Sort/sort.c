@@ -302,31 +302,57 @@ int Sort1_Hoare(int* a, int begin, int end)
 
 //2.挖坑法
 //right找小，left找大，每次找到后即刻将key填入
-int Sort2_Hole(int* a, int begin, int end)
+// 快速排序挖坑法
+int PartSort2(int* a, int left, int right)
 {
-	int midi = GetMidi(a, begin, end);
-	swap(&a[begin], &a[midi]);
-	int key = a[begin];
-
-	int holei = begin;
-	int left = begin, right = end;
+	int keyi = GetMidi(a, left, right);
+	swap(&a[left], &a[keyi]);
+	int hole = left;
+	int key = a[left];
 	while (left < right)
 	{
 		while (left < right && a[right] >= key)
 		{
 			right--;
 		}
-		swap(&a[holei], &a[right]);
-		holei = right;
+		a[hole] = a[right];
+		hole = right;
 		while (left < right && a[left] <= key)
 		{
 			left++;
 		}
-		swap(&a[holei], &a[left]);
-		holei = left;
+		a[hole] = a[left];
+		hole = left;
 	}
-	return holei;
+	a[hole] = key;
+	return hole;
 }
+//此方法虽然也对，但没有很好的复刻挖坑法
+//int Sort2_Hole(int* a, int begin, int end)
+//{
+//	int midi = GetMidi(a, begin, end);
+//	swap(&a[begin], &a[midi]);
+//	int key = a[begin];
+//
+//	int holei = begin;
+//	int left = begin, right = end;
+//	while (left < right)
+//	{
+//		while (left < right && a[right] >= key)
+//		{
+//			right--;
+//		}
+//		swap(&a[holei], &a[right]);
+//		holei = right;
+//		while (left < right && a[left] <= key)
+//		{
+//			left++;
+//		}
+//		swap(&a[holei], &a[left]);
+//		holei = left;
+//	}
+//	return holei;
+//}
 
 //3.前后指针法
 //利用cur指针遍历整个数组，cur指向正在辨别的元素，prev指向左侧区间边界（也是key应该处在的位置），两个指针之间(prev,cur)是右侧分治的元素
