@@ -302,7 +302,6 @@ int Sort1_Hoare(int* a, int begin, int end)
 
 //2.挖坑法
 //right找小，left找大，每次找到后即刻将key填入
-// 快速排序挖坑法
 int PartSort2(int* a, int left, int right)
 {
 	int keyi = GetMidi(a, left, right);
